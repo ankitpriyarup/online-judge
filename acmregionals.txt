@@ -1,0 +1,45 @@
+Problem 1:
+Puzzle can be large
+Backtracking ?!!!!!!
+** Gotta deduplicate the tiles **
+
+Problem 2: Ancient Numerals
+Brute Force. Keep everything *12
+WE GOT THIS YAY GOO TEAM WHOOO!!
+
+Problem 3: Caesar Cipher
+Brute force, split on [^A-Za-z]
+WE GOT THIS ONE TOO YAYY WHOO WE'RE SO COOL
+
+Problem 4: Running on the track
+Take the speeds of each runner in laps / second
+Subtract neighboring runners ? (Take pairs of runners)
+Difference of pairs of runners represents how often they meet up
+lcm of all such pairs shows when they all meet up
+AS A CS MAJOR, I DON'T LIKE RUNNING.
+
+problem 5: Palindromes
+Standard next lexographic algorithm
+YUP YUP YUP BUZZ BUZZ DING DING 15 POINTS
+
+Problem 6: Factorial Factors
+Count number of primes less than or equal to n
+count frequency of each prime
+Number of factors is the product of 1 less than all the frequencies
+JAIME SO GOOD AT MATH WHOO YAY 3*5 POINTS
+
+Problem 7: Crazy Maze Thing
+"You have to store the current state as you go between doors"
+There's no trick, you just A* or Dijkstra's
+Have to keep track of
+- Doors
+- Crumbled Floors
+- Keys
+
+Problem 8: Optics
+Brute force + Floyd Warshalls
+
+Problem 9: Factory problem
+Upgrading the lowest level mine is always the best choice
+_usually_ whenever you can
+Should hold off on upgrading if you can finish something in the time it takes to upgrade
