@@ -1,0 +1,14 @@
+## GUARD
+Some kind of exponential DP problem based on low number of cows
+Can't do 20!, but can do 2^20
+Reread the problem, don't understand what the soltuion to the sample case is
+
+## MARATHON
+Segment tree problem
+When merging segments, see if skipping the end of the first segment or beginning of the second segment is better than skipping something in the middle
+O(nlogn) time
+
+## COW JOG
+Lots of ways to approach this
+Put all cows of same speed in same lane, merge as appropriate
+Cows with the same initial position must be in different lanes
