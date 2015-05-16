@@ -2,3 +2,6 @@
 UTPC/
 **.in
 **.DS_Store
+*.class
+*.swp
+/target
