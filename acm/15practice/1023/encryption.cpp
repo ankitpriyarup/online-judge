@@ -36,7 +36,6 @@ int main() {
             previous[a[i]] = i;
         }
 
-        cin >> Q;
         int x, y;
         for (int i = 0; i < Q; ++i) {
             cin >> x >> y;
