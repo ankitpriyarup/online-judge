@@ -1,0 +1,6 @@
+Darts: lol
+Movie: Put the movies in a binary tree. Keep a map from numbers to negative ids in the tree. Write a balanced tree ????
+Chemist: lol
+Pool: Min cut max flow wtfffffff
+Conservation:
+Farm:
