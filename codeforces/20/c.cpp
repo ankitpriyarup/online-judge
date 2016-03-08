@@ -1,69 +1,83 @@
-#include <cstdio>
+#include <iostream>
+#include <cstring>
+#include <vector>
 #include <queue>
+#include <algorithm>
+#include <utility>
 
 using namespace std;
 
+typedef pair<long long, int> pli;
+
 int N, M;
-//int edges[100010][3];
-vector<pair<int, int> > edges[100010];
-int previous[100010];
-bool seen[100010];
 
-struct node {
-    int n, prev;
-    long long dist;
-    node(int n, long long dist, int prev) : n(n), dist(dist), prev(prev) {};
-};
-
-bool operator<(node n1, node n2) {
-    return n1.dist > n2.dist;
-}
+// Adjacency list representation of a graph
+vector<pair<int, long long> > graph[100005];
+int previous[100005];
+long long total_dist[100005];
 
 int main() {
-    scanf("%d %d", &N, &M);
+    ios_base::sync_with_stdio(false);
+    cin >> N >> M;
+
     int a, b, w;
-    for(int i=0;i<M;i++) {
-        scanf("%d %d %d", &a, &b, &w);
-        edges[a - 1].push_back(make_pair(b - 1, w));
-        edges[b - 1].push_back(make_pair(a - 1, w));
-        previous[a - 1] = -1;
-        previous[b - 1] = -1;
+    for (int i = 0; i < M; ++i) {
+        cin >> a >> b >> w;
+        a--;
+        b--;
+        graph[a].push_back(make_pair(b, w));
+        graph[b].push_back(make_pair(a, w));
     }
 
-    priority_queue<node> pq;
-    pq.push(node(0, 0LL, -1));
-    while(!pq.empty()) {
-        node cur = pq.top();
+    priority_queue<pli, vector<pli>, greater<pli> > pq;
+    pq.push(make_pair(0LL, 0));
+
+    memset(previous, -1, sizeof(previous));
+    memset(total_dist, -1, sizeof(total_dist));
+    total_dist[0] = 0;
+
+    while (!pq.empty()) {
+        pli cur = pq.top();
         pq.pop();
-        if(seen[cur.n]) {
-            continue;
-        }
+        long long dist = cur.first;
+        int node = cur.second;
 
-        seen[cur.n] = true;
-        previous[cur.n] = cur.prev;
-
-        if(cur.n == N - 1) {
+        if (node == N - 1)
             break;
+
+        if (total_dist[node] != -1 && dist > total_dist[node])
+            continue;
+
+        for (auto it = graph[node].begin(); it != graph[node].end(); ++it) {
+            int next = it->first;
+            int weight = it->second;
+            long long new_dist = dist + weight;
+
+            if (total_dist[next] == -1 || new_dist < total_dist[next]) {
+                total_dist[next] = new_dist;
+                previous[next] = node;
+                pq.push(make_pair(new_dist, next));
+            }
+        }
+    }
+
+    if (previous[N - 1] == -1) {
+        cout << "-1\n";
+    } else {
+        vector<int> path;
+        int node = N - 1;
+
+        while (node > 0) {
+            path.push_back(node + 1);
+            node = previous[node];
         }
 
-        for(auto it = edges[cur.n].begin(); it != edges[cur.n].end(); it++) {
-            pq.push(node(it->first, it->second + cur.dist, cur.n));
+        cout << "1";
+        for (int i = path.size() - 1; i >= 0; --i) {
+            cout << " " << path[i];
         }
+        cout << '\n';
     }
-    vector<int> ans;
-    if(!seen[N - 1]) {
-        printf("-1\n");
-    } else {
-        int cur = N - 1;
-        while(cur > 0) {
-            ans.push_back(cur + 1);
-            cur = previous[cur];
-        }
-        printf("1");
-        for(vector<int>::reverse_iterator it = ans.rbegin(); it != ans.rend(); it++) {
-            printf(" %d", *it);
-        }
-        printf("\n");
-    }
+
     return 0;
 }
