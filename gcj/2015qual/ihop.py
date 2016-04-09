@@ -9,7 +9,6 @@ for tc in xrange(1, T + 1):
     ans = pmax
 
     for h in xrange(1, pmax + 1):
-        # try reducing all stacks to height h
         special = 0
         for stack in P:
             special += ceil(float(stack) / h) - 1
