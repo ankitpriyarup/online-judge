@@ -1,0 +1,8 @@
+An Urgent Message:
+
+You're given the binary string
+"8hryGgSEprb2FgSehu4ETq72ngR29gTWNpa2BKYWLgQupuZO9mYELuR29iI=". Using this
+website: https://conv.darkbyte.ru/, we can convert it into binary.
+http://string-functions.com/reverse.aspx reverses the string and plugging the
+binary back into darkbyte gives the key: "Don't forget the milk on your way
+home! XOXO".
