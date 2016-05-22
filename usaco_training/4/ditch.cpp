@@ -23,7 +23,7 @@ long long residual[202][202];
 int previous[202];
 bool visited[202];
 
-int bfs(int source, int sink) {
+bool bfs(int source, int sink) {
     memset(previous, -1, sizeof(previous));
     memset(visited, 0, sizeof(visited));
 
