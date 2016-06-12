@@ -4,6 +4,10 @@ PROG: milk6
 LANG: C++11
 */
 
+// NOTE: This solution is incorrect in the general case, but passes the weak
+// cases on the USACO training pages. While it does compute a minimum cut, it
+// does not optimize for number of edges or lowest edge index.
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
