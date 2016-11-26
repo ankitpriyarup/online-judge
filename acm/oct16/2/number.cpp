@@ -45,9 +45,11 @@ int main() {
             }
         }
 
-        if (inp != 1) ++factors;
+        if (inp != 1) {
+            ++factors;
+        }
 
-        cout << (factors % 2 == 0 ? "Alice" : "Bob") << " wins after move " << ((factors == 0) ? factors : (factors - 1)) << '\n';
+        cout << (factors % 2 == 0 ? "Alice" : "Bob") << " wins after move " << (factors - 1) << '\n';
     }
 
     return 0;

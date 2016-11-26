@@ -3,7 +3,7 @@ name = ['black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 
 
 def solve(resistance):
     best_diff = float('inf')
-    best_c = 10
+    best_coeff = valid[0]
     best_exp = 0
 
     base = 1
@@ -13,7 +13,7 @@ def solve(resistance):
             diff = abs(resistance - val)
             if diff <= best_diff:
                 best_diff = diff
-                best_c = coeff
+                best_coeff = coeff
                 best_exp = third
 
         base *= 10

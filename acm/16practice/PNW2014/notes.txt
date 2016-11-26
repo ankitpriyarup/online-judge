@@ -1,0 +1,25 @@
+Hella WA on A. Read carefully and make sure you handle edge cases / validate
+numbers if you're generating them.
+
+B seems really fucking hard, no clue at all.
+
+C cannot be solved greedily, is max flow. D'oh! Got it right once I was careful
+about edge weights.
+
+D is some nutso recursive function that you probably have to simplify.
+
+E is hard DP. Should know how to do, but I don't :(.
+
+F is matrix exponentiation. Figure out the matrix, then it shouldn't be too bad. You need to keep track of at most 4 * 3, so 12. Try with every possible start and you'll get the answer.
+
+G I have no idea how to do this. Need to figure out how to reduce to nim?
+
+H should be simple knapsack. Forward DP makes this so much easier to read.
+
+I is my favorite problem. Preorder traversal into a lazy segment tree! Unfortunately I don't know / understand lazy updates, so this isn't working.
+
+J seems like a brute force, but I don't understand the sample IO.
+
+K is simple backtracking.
+
+L is right according to official IO. The ICPC site is busted.

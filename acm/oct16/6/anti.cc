@@ -60,12 +60,13 @@ int main() {
     while (T-- > 0) {
         total = 0;
 
-        cin >> N;
-        getline(cin, s);
         for (int i = 0; i < N; ++i) {
             graph[i].clear();
         }
         lookup.clear();
+
+        cin >> N;
+        getline(cin, s);
 
         for (int i = 0; i < N; ++i) {
             getline(cin, s);
@@ -88,5 +89,6 @@ int main() {
 
         cout << minCC << '\n';
     }
+
     return 0;
 }
