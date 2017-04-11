@@ -1,0 +1,49 @@
+1:
+O.O
+OoO 0 0
+
+2:
+O..O
+Oo.O 1 0
+OooO 0 0
+
+3:
+O...O
+O.o.O 1 1
+Ooo.O 0 0
+OoooO 0 0
+
+4:
+O....O
+O.o..O 2 1
+O.oo.O 1 0
+Oooo.O 0 0
+OooooO 0 0
+
+5:
+O.....O
+O..o..O 2 2
+Oo.o..O 1 0
+Oo.oo.O 1 0
+Ooooo.O 0 0
+Ooooo.O 0 0
+
+6:
+O......O
+O..o...O 3 2
+O..o.o.O 1 1
+Oo.o.o.O 1 0
+Oooo.o.O 0 0
+Oooooo.O 0 0
+OooooooO 0 0
+
+7:
+O.......O
+O...o...O 3 3
+O.o.o...O 1 1
+O.o.o.o.O 1 1
+Ooo.o.o.O 0 0
+Ooooo.o.O 0 0
+Ooooooo.O 0 0
+OoooooooO 0 0
+

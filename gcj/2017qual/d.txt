@@ -1,0 +1,2 @@
+every row or column can have at most one not +
+every diagonal can have at most one not x
