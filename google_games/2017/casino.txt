@@ -1,0 +1,13 @@
+XS XS YS YS YS
+
+No diamonds
+No aces
+Two cannot be the triple
+
+3744
+
+13 cards
+4 suits
+
+13 choose 2 * 4 choose 2 * 4 choose 3
+12 * 11 
