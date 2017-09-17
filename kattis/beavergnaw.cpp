@@ -23,7 +23,7 @@ ld solve(ld D, ld v) {
         ld d = (lo + hi) / 2.0L;
 
         ld total = cylinder(D / 2.0L, D);
-        ld remaining = cylinder(d / 2.0, d) 
+        ld remaining = cylinder(d / 2.0, d)
             + 2.0L * (cone(D / 2.0, D / 2.0) - cone(d / 2.0, d / 2.0));
 
         if (total - remaining > v) {

@@ -48,7 +48,6 @@ namespace dinic {
       for (int i = 0; i < V; ++i) {
           curr[i] = last[i];
       }
-      
       memset(dist, -1, sizeof(dist));
 
       queue<int> Q;
@@ -86,7 +85,7 @@ int main() {
         dinic::edge(2 * u, 2 * v + 1);
     }
     int fill = dinic::run(src, sink);
-    if (fill == n) { 
+    if (fill == n) {
         printf("YES\n");
     } else {
         printf("NO\n");
