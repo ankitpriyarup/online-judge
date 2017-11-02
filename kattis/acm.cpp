@@ -28,6 +28,30 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
 
+    int m;
+    string prob, verdict;
+
+    map<string, int> wa;
+    set<string> solved;
+
+    int penalty = 0;
+
+    while (cin >> m) {
+        if (m == -1) break;
+        cin >> prob >> verdict;
+        
+        if (verdict == "right") {
+            if (!solved.count(prob)) {
+                penalty += 20 * wa[prob];
+                penalty += m;
+                solved.insert(prob);
+            }
+        } else {
+            ++wa[prob];
+        }
+    }
+
+    cout << solved.size() << ' ' << penalty << endl;
     
     return 0;
 }
