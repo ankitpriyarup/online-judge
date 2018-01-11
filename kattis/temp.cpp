@@ -3,11 +3,13 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <cassert>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
 #include <algorithm>
+#include <numeric>
 #include <utility>
 #include <vector>
 #include <queue>
