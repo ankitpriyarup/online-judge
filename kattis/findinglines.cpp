@@ -26,7 +26,7 @@ using ld = long double;
 using pii = pair<int, int>;
 
 constexpr int MAXN = 100005;
-constexpr int TRIALS = 60;
+constexpr int TRIALS = 30;
 int n, p;
 int x[MAXN], y[MAXN];
 map<int, int> freq_x, freq_y;
