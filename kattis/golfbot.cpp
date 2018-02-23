@@ -27,7 +27,7 @@ using ll = long long;
 using ld = long double;
 using pii = pair<int, int>;
 
-constexpr int MAXN = (1 << 18) + 1;
+constexpr int MAXN = 200005;
 
 // Taken from kactl
 typedef valarray<complex<ld> > carray;
