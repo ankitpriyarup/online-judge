@@ -36,47 +36,29 @@ int st[LOGN][MAXN];
 int uf[MAXN];
 pii diams[MAXN];
 
-int walk_up(int n, int d) {
-    int x = n;
-    for (int i = 19, p = 1 << 19; i >= 0; --i, p >>= 1) {
-        if (p <= d) {
-            x = st[i][x];
-            d -= p;
-        }
+int lca(int u, int v) {
+    if (depth[u] > depth[v])
+        swap(u, v);
 
-        if (x == -1) {
-            return -1;
-        }
-    }
-
-    return x;
-}
-
-int lca(int x, int y) {
-    if (depth[x] > depth[y]) {
-        return lca(y, x);
-    }
-
-    if (depth[y] > depth[x]) {
-        y = walk_up(y, depth[y] - depth[x]);
-    }
-
-    if (x == y) {
-        return x;
-    }
-
-    int lo = 0;
-    int hi = MAXN;
-    while (lo + 1 < hi) {
-        int mid = lo + ((hi - lo) >> 1);
-        if (walk_up(x, mid) == walk_up(y, mid)) {
-            hi = mid;
-        } else {
-            lo = mid;
+    if (depth[v] > depth[u]) {
+        int delta = depth[v] - depth[u];
+        for (int j = LOGN - 1; j >= 0; --j) {
+            if (delta & (1 << j))
+                v = st[j][v];
         }
     }
 
-    return walk_up(x, hi);
+    if (u == v)
+        return u;
+
+    for (int j = LOGN - 1; j >= 0; --j) {
+        if (st[j][u] != st[j][v]) {
+            u = st[j][u];
+            v = st[j][v];
+        }
+    }
+
+    return st[0][u];
 }
 
 int dist(int u, int v) {
