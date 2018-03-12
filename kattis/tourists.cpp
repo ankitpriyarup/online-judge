@@ -1,106 +1,109 @@
 #include <iostream>
+#include <iomanip>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <cassert>
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
+#include <cmath>
 #include <algorithm>
-#include <vector>
+#include <numeric>
 #include <utility>
-
-#define MAXN 200002
-#define LOGN 20
+#include <vector>
+#include <queue>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include <bitset>
+#include <complex>
 
 using namespace std;
 
+using ll = long long;
+using ld = long double;
+using pii = pair<int, int>;
+
+constexpr int MAXN = 200005;
+constexpr int LOGN = 20;
+
 int n;
-vector<int> graph[MAXN];
-int parent[MAXN][LOGN];
+vector<int> tree[MAXN];
+int st[LOGN][MAXN];
 int depth[MAXN];
 
-void dfs(int x, int p, int d) {
-    for (int i = 0; i < (int)graph[x].size(); ++i) {
-        int child = graph[x][i];
-        if (child != p) {
-            parent[child][0] = x;
-            depth[child] = d + 1;
-            dfs(child, x, d + 1);
-        }
+void dfs(int u, int par) {
+    for (int v : tree[u]) {
+        if (v == par) continue;
+        depth[v] = depth[u] + 1;
+        st[0][v] = u;
+        dfs(v, u);
     }
 }
 
-void gen_lca() {
-    for (int j = 1; j < LOGN; ++j) {
+void gen_st() {
+    for (int j = 0; j + 1 < LOGN; ++j) {
         for (int i = 1; i <= n; ++i) {
-            if (parent[i][j - 1] != -1) 
-                parent[i][j] = parent[parent[i][j - 1]][j - 1];
+            if (st[j][i] != -1) {
+                st[j + 1][i] = st[j][st[j][i]];
+            }
         }
     }
 }
 
-int walk(int x, int l) {
-    int n = x;
-    for (int up = 1 << (LOGN - 1), j = LOGN - 1; j >= 0; up >>= 1, --j) {
-        if (up <= l) {
-            n = parent[n][j];
-            l -= up;
-        }
-
-        if (n == -1)
-            return n;
-    }
-
-    return n;
-}
-
-int lca(int x, int y) {
-    if (depth[x] > depth[y]) {
-        return lca(y, x);
-    }
-
-    if (depth[y] > depth[x]) {
-        y = walk(y, depth[y] - depth[x]);
-    }
-
-    if (x == y) {
-        return x;
-    }
-
-    int lo = 0;
-    int hi = 1 << LOGN;
-    while (lo + 1 < hi) {
-        int mid = lo + (hi - lo) / 2;
-        if (walk(x, mid) == walk(y, mid)) {
-            hi = mid;
-        } else {
-            lo = mid;
+int lca(int u, int v) {
+    if (depth[u] > depth[v]) swap(u, v);
+    if (depth[v] > depth[u]) {
+        for (int j = LOGN - 1; j >= 0; --j) {
+            if (depth[v] - (1 << j) >= depth[u]) {
+                v = st[j][v];
+            }
         }
     }
 
-    return walk(x, hi);
+    if (u == v) return u;
+    for (int j = LOGN - 1; j >= 0; --j) {
+        if (st[j][u] != st[j][v]) {
+            u = st[j][u];
+            v = st[j][v];
+        }
+    }
+
+    return st[0][u];
 }
 
-int dist(int x, int y) {
-    return depth[x] + depth[y] - 2 * depth[lca(x, y)] + 1;
+int dist(int u, int v) {
+    int ans = depth[u] + depth[v] - 2 * depth[lca(u, v)] + 1;
+    return ans;
 }
 
 int main() {
-    cin >> n;
-    int x, y;
-    for (int i = 0; i < n - 1; ++i) {
-        cin >> x >> y;
-        graph[x].push_back(y);
-        graph[y].push_back(x);
-    }
-    memset(parent, -1, sizeof(parent));
-    depth[1] = 0;
-    dfs(1, -1, 0);
-    gen_lca();
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
 
-    long long ans = 0LL;
-    for (int i = 1; i <= n; ++i) {
-        for (int j = 2 * i; j <= n; j += i) {
-            ans += dist(i, j);
+    scanf("%d", &n);
+    int u, v;
+    for (int i = 1; i < n; ++i) {
+        scanf("%d %d", &u, &v);
+        tree[u].push_back(v);
+        tree[v].push_back(u);
+    }
+
+    memset(st, -1, sizeof(st));
+    depth[1] = 0;
+    dfs(1, -1);
+    gen_st();
+
+    ll ans = 0LL;
+    for (int u = 1; u <= n; ++u) {
+        for (int v = 2 * u; v <= n; v += u) {
+            ans += dist(u, v);
         }
     }
 
-    cout << ans << '\n';
-
+    printf("%lld\n", ans);
+    
     return 0;
 }
