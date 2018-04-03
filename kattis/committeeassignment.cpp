@@ -100,8 +100,6 @@ int main() {
             for (int sub = mask; sub; sub = (sub - 1) & mask) {
                 dp[mask] = min(dp[mask], dp[sub] + dp[mask ^ sub]);
             }
-
-            // printf("dp[%x] = %d\n", mask, dp[mask]);
         }
 
         cout << dp[(1 << n) - 1] << '\n';
