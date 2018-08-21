@@ -111,8 +111,6 @@ void Node::push() {
 }
 
 void Node::pull() {
-    push();
-
     size = subtree_size(left) + subtree_size(right) + 1;
     sum = subtree_sum(left) + subtree_sum(right) + static_cast<ll>(val);
 
