@@ -1,0 +1,6 @@
+s = input()
+t = input()
+d = sum(a != b for a, b in zip(s, t))
+sp = all((a == ' ') == (b == ' ') for a, b in zip(s, t))
+k = int(input())
+print('Plagiarized' if sp and d <= k else 'No plagiarism')
