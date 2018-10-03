@@ -1,7 +1,7 @@
-**.out
+*.out
 UTPC/
-**.in
-**.DS_Store
+*.in
+*.DS_Store
 *.class
 *.swp
 /target
