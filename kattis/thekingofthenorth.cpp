@@ -89,7 +89,6 @@ namespace dinic {
     }
 }
 
-constexpr int MAXN = 303;
 int n, m;
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, -1, 0, 1};
@@ -130,7 +129,7 @@ int main() {
             scanf("%d", &cap);
             dinic::edge(node, node|1, cap, 0);
 
-            if (i == 0 || j == 0) {
+            if (i == 0 || j == 0 || i == n - 1 || j == m - 1) {
                 dinic::edge(src, node, oo, 0);
             }
         }
