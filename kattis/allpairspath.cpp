@@ -25,9 +25,12 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 using pii = pair<int, int>;
-using edge = tuple<int, int, int>;
 
 constexpr int INF = 1e8 + 89;
+constexpr int MAXN = 155;
+bool conn[MAXN][MAXN];
+bool is_inf[MAXN][MAXN];
+int dist[MAXN][MAXN];
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -37,41 +40,46 @@ int main() {
     while (scanf(" %d %d %d", &n, &m, &q) == 3) {
         if (!n) break;
 
-        vector<edge> edges;
-        int u, v, w;
-        for (int i = 0; i < m; ++i) {
-            scanf(" %d %d %d", &u, &v, &w);
-            edges.emplace_back(u, v, w);
-        }
-
-        vector<vector<char>> conn(n, vector<char>(n, 0));
-        vector<vector<char>> is_inf(n, vector<char>(n, 0));
-        vector<vector<int>> dist(n, vector<int>(n, INF));
-
+        memset(conn, 0, sizeof(conn));
+        memset(is_inf, 0, sizeof(is_inf));
         for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                dist[i][j] = INF;
+            }
+
             conn[i][i] = true;
             dist[i][i] = 0;
         }
 
-        for (int s = 0; s < n; ++s) {
-            for (int i = 0; i < n - 1; ++i) {
-                for (auto& e : edges) {
-                    tie(u, v, w) = e;
-                    if (!conn[s][u]) continue;
-                    conn[s][v] = true;
-                    dist[s][v] = min(dist[s][v], dist[s][u] + w);
+        int u, v, w;
+        for (int i = 0; i < m; ++i) {
+            scanf(" %d %d %d", &u, &v, &w);
+            conn[u][v] = true;
+            dist[u][v] = min(dist[u][v], w);
+        }
+
+        for (int k = 0; k < n; ++k) {
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    if (!conn[i][k] or !conn[k][j])
+                        continue;
+                    conn[i][j] = true;
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
                 }
             }
         }
 
-        for (int s = 0; s < n; ++s) {
+        for (int k = 0; k < n; ++k) {
             for (int i = 0; i < n; ++i) {
-                for (auto& e : edges) {
-                    tie(u, v, w) = e;
-                    if (!conn[s][u]) continue;
-                    if (dist[s][u] + w < dist[s][v]) {
-                        dist[s][v] = dist[s][u] + w;
-                        is_inf[s][v] = true;
+                for (int j = 0; j < n; ++j) {
+                    if (!conn[i][k] or !conn[k][j])
+                        continue;
+                    if (dist[k][k] < 0 
+                            or is_inf[i][k] 
+                            or is_inf[k][j] 
+                            or dist[i][k] + dist[k][j] < dist[i][j]) {
+                        is_inf[i][j] = true;
+                        dist[i][j] = -INF;
                     }
                 }
             }
