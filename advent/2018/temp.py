@@ -3,7 +3,9 @@ import itertools
 import random
 import sys
 
+sys.setrecursionlimit(1000000)
+
 def main():
-    pass
+    lines = [line.strip() for line in sys.stdin]
 
 main()
