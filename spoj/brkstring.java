@@ -4,46 +4,44 @@ import java.util.*;
 
 public class brkstring {
     public static void main(String[] args) throws Exception {
-        StringBuilder sb = new StringBuilder();
-        InputReader in = new InputReader(System.in);
-        try {
-            while (true) {
-                int n = in.nextInt();
-                int m = in.nextInt();
-                ++m;
-                int[] a = new int[m + 1];
-                long[][] dp = new long[m][m + 1];
-                int[][] opt = new int[m][m + 1];
-                a[0] = 0;
-                for (int i = 1; i < m; ++i) {
-                    a[i] = in.nextInt();
-                    dp[i][i + 1] = 0;
-                    opt[i][i + 1] = i;
-                }
-                a[m] = n;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        StringTokenizer st;
+        while ((line = br.readLine()) != null) {
+            st = new StringTokenizer(line);
+            int n = Integer.parseInt(st.nextToken());
+            int m = Integer.parseInt(st.nextToken());
+            ++m;
+            int[] a = new int[m + 1];
+            long[][] dp = new long[m][m + 1];
+            int[][] opt = new int[m][m + 1];
+            a[0] = 0;
+            st = new StringTokenizer(br.readLine());
+            for (int i = 1; i < m; ++i) {
+                a[i] = Integer.parseInt(st.nextToken());
+                dp[i][1] = 0;
+                opt[i][1] = i;
+            }
+            a[m] = n;
 
-                for (int len = 2; len <= m; ++len) {
-                    for (int i = 0; i + len <= m; ++i) {
-                        dp[i][i + len] = 987654321;
-                        int lo = opt[i][i + len - 1];
-                        int hi = opt[i + 1][i + len];
-                        int cost = a[i + len] - a[i];
-                        for (int k = lo; k <= hi; ++k) {
-                            long new_cost = dp[i][k] + dp[k][i + len] + cost;
-                            if (new_cost < dp[i][i + len]) {
-                                dp[i][i + len] = new_cost;
-                                opt[i][i + len] = k;
-                            }
+            for (int len = 2; len <= m; ++len) {
+                for (int i = 0; i + len <= m; ++i) {
+                    dp[i][len] = 987654321;
+                    int lo = opt[i][len - 1];
+                    int hi = opt[i + 1][len - 1];
+                    int cost = a[i + len] - a[i];
+                    for (int k = lo; k <= hi; ++k) {
+                        long new_cost = dp[i][k - i] + dp[k][i + len - k] + cost;
+                        if (new_cost < dp[i][len]) {
+                            dp[i][len] = new_cost;
+                            opt[i][len] = k;
                         }
                     }
                 }
-
-                sb.append(dp[0][m]);
-                sb.append('\n');
             }
-        } catch (InputMismatchException e) {
+
+            System.out.println(dp[0][m]);
         }
-        System.out.print(sb.toString());
     }
 
     static class InputReader {
