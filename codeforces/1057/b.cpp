@@ -38,9 +38,7 @@ int main() {
     }
 
     int lo = 0;
-    int hi = n + 1;
-    while (lo + 1 < hi) {
-        int mid = (lo + hi) >> 1;
+    for (int mid = n; mid > 0; --mid) {
         int goal = 100 * mid;
         int cur = 0;
         for (int i = 0; i < mid; ++i) {
@@ -56,8 +54,7 @@ int main() {
 
         if (poss) {
             lo = mid;
-        } else {
-            hi = mid;
+            break;
         }
     }
 
