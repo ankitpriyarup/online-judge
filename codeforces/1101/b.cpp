@@ -94,10 +94,10 @@ int main() {
     }
 
     int i = 0;
-    while (!valid_pref[i])
+    while (i < n and !valid_pref[i])
         ++i;
-    int j = n -1;
-    while (!valid_suff[j]) {
+    int j = n - 1;
+    while (j >= 0 and !valid_suff[j]) {
         --j;
     }
 
