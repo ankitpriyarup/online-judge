@@ -1,9 +1,4 @@
-#include <iostream>
-#include <cstdio>
-#include <cstring>
-#include <utility>
-#include <tuple>
-#include <cassert>
+#include <bits/stdc++.h>
 
 using namespace std;
 using ll = long long;
@@ -184,16 +179,26 @@ Node* merge3(Node* a, Node* b, Node* c) {
     return merge(ab, c);
 }
 
+Node* build_treap(const vector<int>& a, int l, int r) {
+    if (l >= r) {
+        return nullptr;
+    }
+    if (l + 1 == r) {
+        int x = a.at(l);
+        return new Node(x);
+    }
+    int m = (l + r) >> 1;
+
+    return merge(build_treap(a, l, m), build_treap(a, m, r));
+}
+
 Node* read_treap(int len) {
-    Node* root = nullptr;
-    int x;
+    vector<int> a(len);
     for (int i = 0; i < len; ++i) {
-        scanf(" %d", &x);
-        Node* node = new Node(x);
-        root = merge(root, node);
+        scanf(" %d", &a[i]);
     }
 
-    return root;
+    return build_treap(a, 0, len);
 }
 
 Node* make_same(Node* root, int start, int len, int val) {
@@ -242,8 +247,8 @@ pair<ll, Node*> get_sum(Node* root, int start, int len) {
 }
 
 int main() {
-    int T;
-    scanf(" %d", &T);
+    int T = 1;
+    // scanf(" %d", &T);
 
     char cmd[20];
     while (T-- > 0) {
