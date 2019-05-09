@@ -1,0 +1,5 @@
+n = int(input())
+v = list(map(int, input().split()))
+c = list(map(int, input().split()))
+ans = sum(max(0, x - y) for x, y in zip(v, c))
+print(ans)
