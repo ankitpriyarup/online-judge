@@ -10,7 +10,6 @@ int par[MAXN], depth[MAXN], sz[MAXN];
 int timer = 0;
 int tin[MAXN], tout[MAXN], nxt[MAXN];
 
-
 int seg_tree[4 * MAXN], lazy[4 * MAXN];
 
 void push(int node) {
